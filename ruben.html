@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Count Counter with Cats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 10px;
+            background-image: url('IMG_8007.jpg'); 
+            background-size: contain;
+            background-position: center;
+            color: white;
+        }
+        .counter {
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #ff4500;
+        }
+        .name-list {
+            margin-top: 30px;
+            font-size: 18px;
+            text-align: left;
+            max-width: 400px;
+            margin: 20px auto;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            width: 300px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Body Count Counter</h1>
+    <div class="counter" id="counter">0</div>
+    <button onclick="incrementCount()">Add to Body Count</button>
+
+    <div>
+        <input type="text" id="nameInput" placeholder="Enter name to add">
+        <button onclick="addName()">Add Name</button>
+    </div>
+
+    <div class="name-list" id="nameList">
+        <h2>Names Added:</h2>
+        <ul id="names"></ul>
+    </div>
+
+    <script>
+        let count = 0;
+        let names = [];
+
+        // Function to increment the body count
+        function incrementCount() {
+            count++;
+            document.getElementById("counter").textContent = count;
+        }
+
+        // Function to add a name to the list
+        function addName() {
+            const nameInput = document.getElementById("nameInput").value;
+            if (nameInput.trim() !== "") {
+                names.push(nameInput);
+                document.getElementById("nameInput").value = "";  // Clear input field
+                updateNameList();
+            } else {
+                alert("Please enter a valid name.");
+            }
+        }
+
+        // Function to update the displayed name list
+        function updateNameList() {
+            const nameListElement = document.getElementById("names");
+            nameListElement.innerHTML = "";  // Clear the current list
+
+            names.forEach(name => {
+                const li = document.createElement("li");
+                li.textContent = name;
+                nameListElement.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
